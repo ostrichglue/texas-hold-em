@@ -12,21 +12,25 @@ public class Deck
 	private				 int 		numOfCardsInDeck;
 	private static final String[] 	suits = {"heart", "diamond", "spade", "club"}; 
 	
+	/**
+	 * Initializes the deck with all 52 unique cards without shuffling them
+	 */
 	public Deck()
 	{
 		this.fillDeck();
 	}
 	
+	/**
+	 * Initializes the Deck with all 52 unique cards, and shuffles if asked for.
+	 * @param shuffleInitially Shuffles the deck randomly after creation if true
+	 */
 	public Deck(boolean shuffleInitially)
 	{
+		this.fillDeck();
+		
 		if(shuffleInitially == true)
 		{
-			this.fillDeck();
 			this.shuffleDeck();
-		}
-		else
-		{
-			this.fillDeck();
 		}
 	}
 	

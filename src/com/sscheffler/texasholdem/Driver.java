@@ -52,6 +52,7 @@ public class Driver
 		cardsOnTable.add(deck.getNextCard());
 		cardsOnTable.add(deck.getNextCard());
 		
+		//Append flop info
 		cardsOnTableInformation.append("\nFlop: ");
 		for(int flopInfo = 0; flopInfo < 3; flopInfo++)
 		{
@@ -67,6 +68,7 @@ public class Driver
 		deck.getNextCard();	//Burn
 		cardsOnTable.add(deck.getNextCard());
 		
+		//Append turn info
 		card = cardsOnTable.get(3);
 		cardsOnTableInformation.append("\nTurn: " + card.getValueAsString() + " of " + card.getSuitWithS());
 		
@@ -74,9 +76,11 @@ public class Driver
 		deck.getNextCard();	//Burn
 		cardsOnTable.add(deck.getNextCard());
 		
+		//Append river info
 		card = cardsOnTable.get(4);
 		cardsOnTableInformation.append("\nRiver: " + card.getValueAsString() + " of " + card.getSuitWithS());
 		
+		//Print collected info on flop, turn, and river
 		System.out.println(cardsOnTableInformation.toString());
 	}
 }
