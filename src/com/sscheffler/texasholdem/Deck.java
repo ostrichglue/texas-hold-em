@@ -22,6 +22,7 @@ public class Deck
 	
 	/**
 	 * Initializes the Deck with all 52 unique cards, and shuffles if asked for.
+	 * 
 	 * @param shuffleInitially Shuffles the deck randomly after creation if true
 	 */
 	public Deck(boolean shuffleInitially)
@@ -40,7 +41,7 @@ public class Deck
 	public void fillDeck()
 	{
 		//"Delete" all cards from deck
-		this.deckOfCards 		= new ArrayList<Card>(52);
+		this.deckOfCards 		= new ArrayList<Card>(Deck.numOfCards);
 		this.numOfCardsInDeck 	= 0;
 		
 		Card	cardToAdd;
@@ -61,16 +62,18 @@ public class Deck
 	
 	/**
 	 * Returns a random card from the deck.
+	 * 
 	 * @return A random card from the deck.
 	 */
 	public Card getRandomCard()
 	{
 		this.numOfCardsInDeck--;
-		return this.deckOfCards.get(new Random().nextInt(this.deckOfCards.size()));
+		return this.deckOfCards.get(new Random().nextInt(this.numOfCardsInDeck));
 	}
 	
 	/**
 	 * Removes and returns the next card in the deck.
+	 * 
 	 * @return The card at index 0 in the deck.
 	 */
 	public Card getNextCard()
@@ -80,10 +83,10 @@ public class Deck
 	}
 	
 	/**
-	 * Shuffles the deck randomly.
+	 * Shuffles the deck randomly several times.
 	 */
 	public void shuffleDeck()
 	{
-		Collections.shuffle(deckOfCards);
+		for(int i = 0; i < 20; i++){ Collections.shuffle(deckOfCards); }
 	}
 }

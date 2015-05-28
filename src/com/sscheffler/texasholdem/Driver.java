@@ -11,6 +11,7 @@ public class Driver
 		ArrayList<Card>		cardsOnTable = new ArrayList<>(5);
 		StringBuilder		cardsOnTableInformation = new StringBuilder();
 		Deck				deck = new Deck(true);
+		HandHelper			handHelper;
 		Integer[]			options = {1, 2, 3, 4, 5, 6, 7};
 		int					numOfPlayersBesidesSelf;
 		ArrayList<Player> 	players;
@@ -46,6 +47,9 @@ public class Driver
 			players.get(i).printHand();
 		}
 		
+		//Start the hand helper
+		handHelper = new HandHelper(players);
+		
 		//Flop
 		deck.getNextCard();	//Burn
 		cardsOnTable.add(deck.getNextCard());
@@ -53,7 +57,7 @@ public class Driver
 		cardsOnTable.add(deck.getNextCard());
 		
 		//Append flop info
-		cardsOnTableInformation.append("\nFlop: ");
+		cardsOnTableInformation.append("\nFlop:  ");
 		for(int flopInfo = 0; flopInfo < 3; flopInfo++)
 		{
 			card = cardsOnTable.get(flopInfo);
@@ -64,13 +68,19 @@ public class Driver
 			}
 		}
 		
+		//Add to handHelper
+		handHelper.addCommunityCards(cardsOnTable);
+		
 		//Turn
 		deck.getNextCard();	//Burn
 		cardsOnTable.add(deck.getNextCard());
 		
 		//Append turn info
 		card = cardsOnTable.get(3);
-		cardsOnTableInformation.append("\nTurn: " + card.getValueAsString() + " of " + card.getSuitWithS());
+		cardsOnTableInformation.append("\nTurn:  " + card.getValueAsString() + " of " + card.getSuitWithS());
+		
+		//Add to handHelper
+		handHelper.addCommunityCards(card);
 		
 		//River
 		deck.getNextCard();	//Burn
@@ -80,7 +90,15 @@ public class Driver
 		card = cardsOnTable.get(4);
 		cardsOnTableInformation.append("\nRiver: " + card.getValueAsString() + " of " + card.getSuitWithS());
 		
+		//Add to handHelper
+		handHelper.addCommunityCards(card);
+		
 		//Print collected info on flop, turn, and river
 		System.out.println(cardsOnTableInformation.toString());
+		
+		Player playerWithBestHand = handHelper.determineBestHand();
+		
+		System.out.println("The winning player is " + playerWithBestHand.getName() + " with " + Hand.ranks[playerWithBestHand.getRank()]);
+		
 	}
 }

@@ -1,10 +1,14 @@
 package com.sscheffler.texasholdem;
 
+import java.util.ArrayList;
+
 public class Player
 {
-	private Card[] 	hand;
-	private	Boolean	isCPU;
-	private String	name;
+	private boolean			flopped;
+	private ArrayList<Card> hand;
+	private	Boolean			isCPU;
+	private String			name;
+	private int				rank;
 	
 	/**
 	 * Initializes the Player object as a CPU.
@@ -16,9 +20,11 @@ public class Player
 		if(name == null){throw new IllegalArgumentException("Player constructor: name is null");}
 		if(name.length() > 16){throw new IllegalArgumentException("Player constructor: name is more than 16 chars");}
 		
-		this.hand 	= new Card[2];
+		this.flopped= false;
+		this.hand 	= new ArrayList<Card>(2);
 		this.isCPU  = true;
 		this.name 	= name;
+		this.rank 	= 0;
 	}
 	
 	/**
@@ -32,7 +38,7 @@ public class Player
 		if(name == null){throw new IllegalArgumentException("Player constructor: name is null");}
 		if(name.length() > 16){throw new IllegalArgumentException("Player constructor: name is more than 16 chars");}
 		
-		this.hand 	= new Card[2];
+		this.hand 	= new ArrayList<Card>(2);
 		this.isCPU 	= isCPU;
 		this.name 	= name;
 	}
@@ -45,33 +51,15 @@ public class Player
 	public void addCardToHand(Card cardToAdd)
 	{
 		if(cardToAdd == null){throw new IllegalArgumentException("addCardToHand method: Card is null");}
-		if(this.hand[0] != null && this.hand[1] != null){throw new IllegalArgumentException("addCardToHand method: hand is already full");}
-		if(this.hand[0] == null)
+		if(this.hand.size() > 2){throw new IllegalArgumentException("addCardToHand method: hand is already full");}
+		if(this.hand.size() == 0)
 		{
-			this.hand[0] = cardToAdd;
+			this.hand.add(cardToAdd);
 		}
 		else
 		{
-			this.hand[1] = cardToAdd;
+			this.hand.add(cardToAdd);
 		}
-	}
-	
-	/**
-	 * Prints the info on all of the cards in the player's current hand.
-	 */
-	public void printHand()
-	{
-		System.out.println("Current hand for " + this.name + ": " + this.hand[0].getValueAsString() + " of " + this.hand[0].getSuitWithS() + ", " 
-				+ this.hand[1].getValueAsString() + " of " + this.hand[1].getSuitWithS());
-	}
-
-	/**
-	 * Returns true if the Player is a CPU, and false if not.
-	 * @return The isCPU boolean
-	 */
-	public Boolean getIsCPU()
-	{
-		return isCPU;
 	}
 	
 	/**
@@ -86,4 +74,32 @@ public class Player
 		
 		this.name = newName;
 	}
+	
+	public void flop()
+	{
+		this.flopped = true;
+	}
+
+	/**
+	 * Prints the info on all of the cards in the player's current hand.
+	 */
+	public void printHand()
+	{
+		System.out.println("Current hand for " + this.name + ": " + this.hand.get(0).getValueAsString() + " of " + this.hand.get(0).getSuitWithS() + ", " 
+				+ this.hand.get(1).getValueAsString() + " of " + this.hand.get(1).getSuitWithS());
+	}
+
+	/**
+	 * Returns true if the Player is a CPU, and false if not.
+	 * @return The isCPU boolean
+	 */
+	public Boolean getIsCPU(){ return this.isCPU; }
+	
+	public ArrayList<Card> getHand(){ return this.hand; }
+	
+	public String getName(){ return this.name; }
+	
+	public int getRank(){ return this.rank; }
+	
+	public void setRank(int newRank){ this.rank = newRank; }
 }
