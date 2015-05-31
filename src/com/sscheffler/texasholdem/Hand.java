@@ -1,7 +1,6 @@
 package com.sscheffler.texasholdem;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Collections;
 
 public class Hand implements Comparable<Hand>
@@ -35,11 +34,7 @@ public class Hand implements Comparable<Hand>
 	
 	public void sortLowestToHighest(){ Collections.sort(this.cards); }
 	
-	public void sortHighestToLowest()
-	{
-		this.sortLowestToHighest();
-		Collections.reverse(this.cards);
-	}
+	public void sortHighestToLowest(){ Collections.sort(this.cards, Collections.reverseOrder()); }
 	
 	public int getHighestNumberOfSuits()
 	{

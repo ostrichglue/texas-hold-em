@@ -4,7 +4,7 @@ import java.util.ArrayList;
 
 public class Player
 {
-	private boolean			flopped;
+	private boolean			folded;
 	private ArrayList<Card> hand;
 	private	Boolean			isCPU;
 	private String			name;
@@ -20,7 +20,7 @@ public class Player
 		if(name == null){throw new IllegalArgumentException("Player constructor: name is null");}
 		if(name.length() > 16){throw new IllegalArgumentException("Player constructor: name is more than 16 chars");}
 		
-		this.flopped= false;
+		this.folded= false;
 		this.hand 	= new ArrayList<Card>(2);
 		this.isCPU  = true;
 		this.name 	= name;
@@ -77,7 +77,7 @@ public class Player
 	
 	public void flop()
 	{
-		this.flopped = true;
+		this.folded = true;
 	}
 
 	/**
@@ -102,4 +102,9 @@ public class Player
 	public int getRank(){ return this.rank; }
 	
 	public void setRank(int newRank){ this.rank = newRank; }
+	
+	public boolean isFolded(){ return this.folded; }
+	
+	public void fold(){ this.folded = true; }
+	
 }

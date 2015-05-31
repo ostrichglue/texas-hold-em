@@ -19,7 +19,7 @@ public class Driver
 		
 		//Get input from user
 		numOfPlayersBesidesSelf = (int) JOptionPane.showInputDialog(null, "Choose how many players you would like to play against:", "Texas Hold Em",
-				JOptionPane.QUESTION_MESSAGE, null, options, options[2]);
+				JOptionPane.QUESTION_MESSAGE, null, options, options[6]);
 		
 		playerName = JOptionPane.showInputDialog(null, "What is your name?", "Thaddeus");
 		
